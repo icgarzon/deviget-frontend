@@ -1,0 +1,19 @@
+.main-header{
+
+    border-bottom: 2px solid #ddd;
+
+    &__wrap{
+
+        &__logo{
+            width: 150px;
+            height: 40px;
+            background-image: url('../../images/reddit-logo.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: auto 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    
+}

@@ -1,0 +1,15 @@
+.main-wrapper{
+
+    height: 100vh;
+
+    &__contain{
+
+        height: 100vh;
+        
+        &__navigation-bar{
+            border-right: 1px solid #ccc;
+        }
+
+    }
+
+}

@@ -1,0 +1,15 @@
+@import 'theme/variables';
+@import 'theme/responsive';
+@import 'components/footer';
+@import 'components/header';
+@import 'components/content';
+
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none i !important;
+}
