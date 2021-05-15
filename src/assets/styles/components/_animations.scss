@@ -1,0 +1,22 @@
+.animated{
+    -webkit-transition-property: all; 
+    -moz-transition-property: all; 
+    -ms-transition-property: all; 
+    -o-transition-property: all; 
+    transition-property: all; 
+    -webkit-transition-duration: 0.2s; 
+    -moz-transition-duration: 0.2s; 
+    -ms-transition-duration: 0.2s; 
+    -o-transition-duration: 0.2s; 
+    transition-duration: 0.2s; 
+    -webkit-transition-timing-function: ease-in-out; 
+    -moz-transition-timing-function: ease-in-out; 
+    -ms-transition-timing-function: ease-in-out; 
+    -o-transition-timing-function: ease-in-out; 
+    transition-timing-function: ease-in-out; 
+    -webkit-transition-delay: 0s; 
+    -moz-transition-delay: 0s; 
+    -ms-transition-delay: 0s; 
+    -o-transition-delay: 0s; 
+    transition-delay: 0s;
+}

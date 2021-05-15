@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 import React from 'react';
 import {
-  Col, Container, Row,
+  Col, Container, ListGroup, Row,
 } from 'react-bootstrap';
 import { Header } from '../common/header';
 import { Footer } from '../common/footer';
-import { PostCard } from '../post/card';
+import { PostCard } from '../post/list';
 import { connect } from "react-redux";
 import { getData } from '../../store/actions/';
 
@@ -55,12 +55,14 @@ class Home extends React.Component<AppProps,AppState> {
           <Header />
           <Container fluid className="main-wrapper p-0">
             <Row className="main-wrapper__contain p-0">
-              <Col xs={3} className="main-wrapper__contain__navigation-bar">
-                <ul className="main-wrapper__contain__navigation-bar__posts">
+              <Col xs={3} className="main-wrapper__contain__navigation-bar p-0">
+                <ListGroup className="main-wrapper__contain__navigation-bar__posts w-100">
                   {posts.map((item) => (
-                    <li className="main-wrapper__contain__navigation-bar__posts__items"><PostCard {...item.data} /></li>
+                    <ListGroup.Item className="main-wrapper__contain__navigation-bar__posts__items p-0">
+                      <PostCard {...item.data} />
+                    </ListGroup.Item>
                   ))}
-                </ul>
+                </ListGroup>
               </Col>
               <Col xs={9} className="">
                 Not selected yet

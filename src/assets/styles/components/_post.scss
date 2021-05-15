@@ -1,0 +1,55 @@
+.post-item{
+
+    max-height: 100px;
+    cursor: pointer;
+
+    &__thumbnail{
+        width: 100%;
+        min-height: 80px;
+        max-height: 100px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    &__body{
+
+        padding-top: 10px;
+
+        &__title{
+            font-size: 0.7rem;
+            color:rgb(107, 107, 107);
+            text-transform: uppercase;
+        }
+
+        &__description{
+            max-height: 30px;
+            font-size: 0.7rem;
+            line-height: 0.8rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            white-space: nowrap;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical; 
+        }
+
+        &__more{
+            font-size: 0.6rem;
+            margin-top: 15px;
+        }
+
+    }
+
+
+    &:hover{
+        background-color: #f2f5f6;
+
+        
+    }
+
+    &:hover &__thumbnail{
+        opacity: 0.5;
+    }
+
+}

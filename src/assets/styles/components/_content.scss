@@ -1,6 +1,7 @@
 .main-wrapper{
 
     height: 100vh;
+    z-index: 1;
 
     &__contain{
 
@@ -9,16 +10,22 @@
         &__navigation-bar{
 
             border-right: 1px solid #ccc;
+            overflow-x: scroll;
             padding: 20px;
+            height: 100vh;
 
             &__posts {
 
+                border:none;
                 list-style-type: none;
                 padding: 0;
                 margin: 0;
+                margin-bottom: 100px;
 
                 &__items {
-
+                    border-top: none !important;
+                    border-left: none !important;
+                    border-right: none !important;
                 }
 
             }
