@@ -5,10 +5,10 @@ import {
 } from 'react-bootstrap';
 import { Header } from '../common/header';
 import { Footer } from '../common/footer';
-
-import store from '../../store';
+import { PostCard } from '../post/card';
 import { connect } from "react-redux";
 import { getData } from '../../store/actions/';
+
 
 
 type AppProps = {
@@ -56,20 +56,10 @@ class Home extends React.Component<AppProps,AppState> {
           <Container fluid className="main-wrapper p-0">
             <Row className="main-wrapper__contain p-0">
               <Col xs={3} className="main-wrapper__contain__navigation-bar">
-                <ul>
-                  {
-                    posts && posts.length > 0 ? 
-                    posts.map((item) => (
-                      <li key={item.data.id}>
-                        {item.data.title}
-                        {item.data.author}
-                        {item.data.created}
-                        {item.data.thumbnail}
-                        {item.data.num_comments}
-                        {item.data.num_comments}
-                      </li>
-                    )) : ''
-                  }
+                <ul className="main-wrapper__contain__navigation-bar__posts">
+                  {posts.map((item) => (
+                    <li className="main-wrapper__contain__navigation-bar__posts__items"><PostCard {...item.data} /></li>
+                  ))}
                 </ul>
               </Col>
               <Col xs={9} className="">
