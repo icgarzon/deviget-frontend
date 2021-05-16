@@ -35,14 +35,8 @@ class Home extends React.Component<AppProps,AppState> {
   
   render() {
 
-    const { posts } = this.props; console.log('Props', this.props);
+    const { posts } = this.props;
     const isOnLine = navigator.onLine;
-
-    if(posts){
-      console.log('isOnLine', isOnLine);
-      console.log('Posts:');
-      console.log(posts);
-    }
 
     if (!this.state.isLoaded) {
 
@@ -55,7 +49,7 @@ class Home extends React.Component<AppProps,AppState> {
           <Header />
           <Container fluid className="main-wrapper p-0">
             <Row className="main-wrapper__contain p-0">
-              <Col xs={3} className="main-wrapper__contain__navigation-bar p-0">
+              <Col xs={3} md={4} lg={4} xl={3} className="main-wrapper__contain__navigation-bar p-0">
                 <ListGroup className="main-wrapper__contain__navigation-bar__posts w-100">
                   {posts.map((item) => (
                     <ListGroup.Item className="main-wrapper__contain__navigation-bar__posts__items p-0">
@@ -63,9 +57,18 @@ class Home extends React.Component<AppProps,AppState> {
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
+                <Container className="main-wrapper__contain__navigation-bar__actions w-100">
+                    Options
+                </Container>
               </Col>
-              <Col xs={9} className="">
-                Not selected yet
+              <Col xs={9} md={8} lg={8} xl={9} className="main-wrapper__contain__detail p-0">
+                <div className="main-wrapper__contain__detail__empty">
+                  <div className="main-wrapper__contain__detail__empty__icon"></div>
+                  <h2>
+                    Select a <span className="emphasys">item</span>
+                    <span className="subtitle">To view the detail</span>
+                  </h2>
+                </div>
               </Col>
             </Row>
           </Container>

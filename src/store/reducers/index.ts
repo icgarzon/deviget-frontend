@@ -1,14 +1,14 @@
 import { DATA_LOADED } from "../constants/action-types";
 
 const initialState = {
-  posts: []
+  posts: [{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
 };
 
 function rootReducer(state = initialState, action: { type: string; payload: any; }) {
 
-  if (action.type === DATA_LOADED) { console.log('action.type:',action.type);
+  if (action.type === DATA_LOADED) {
     return Object.assign({}, state, {
-      posts: state.posts.concat(action.payload)
+      posts: action.payload
     });
   }
 

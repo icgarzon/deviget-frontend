@@ -9,7 +9,7 @@
         
         &__navigation-bar{
 
-            border-right: 1px solid #ccc;
+            //border-right: 1px solid #ccc;
             overflow-x: scroll;
             padding: 20px;
             height: 100vh;
@@ -20,12 +20,86 @@
                 list-style-type: none;
                 padding: 0;
                 margin: 0;
-                margin-bottom: 100px;
+                margin-bottom: 100px !important;
 
                 &__items {
                     border-top: none !important;
                     border-left: none !important;
                     border-right: none !important;
+                }
+
+            }
+
+            &::-webkit-scrollbar-track{
+                -webkit-box-shadow:none;
+                background-color: #F5F5F5;
+            }
+
+            &::-webkit-scrollbar{
+                width: 2px;
+                background-color: #dddddd;
+            }
+
+            &::-webkit-scrollbar-thumb{
+                background-color: $color-main;
+            }
+
+
+            &__actions{
+                border: 1px solid red;
+                position: absolute;
+                bottom:20px;
+            }
+
+        }
+
+
+
+
+
+        &__detail{
+
+            position: relative;
+
+            &__empty{
+                
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -100px;
+                margin-top: -170px;
+                width: 200px;
+
+                &__icon{
+                    width: 200px;
+                    height: 200px;
+                    background-image: url('../../images/select-call-to.svg');
+                    background-size: auto 90%;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    opacity: 0.2;
+                }
+
+                h2{
+
+                    font-size: 20px;
+                    display: block;
+                    text-transform: uppercase;
+                    text-align: center;
+                    width: 100%;
+                    font-weight: 500;
+                    margin-top: 20px;
+
+                    span.emphasys{
+                        color:$color-main;
+                    }
+
+                    span.subtitle{
+                        display: block;
+                        width: 100%;
+                        font-size: 14px;
+                        font-weight: 300;
+                    }
                 }
 
             }
