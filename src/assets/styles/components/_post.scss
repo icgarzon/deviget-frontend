@@ -29,9 +29,11 @@
             color:$color-main;
             text-transform: uppercase;
             font-weight: 300;
+            line-height: 0.7rem;
         }
 
         &__description{
+            margin-top: 10px;
             max-height: 30px;
             font-size: 0.7rem;
             line-height: 0.8rem;
@@ -172,6 +174,25 @@
                 text-indent: -1000px;
             }
 
+        }
+
+    }
+
+    &.not-read &__body{
+
+        &__title{
+            &::before{
+                content: '';
+                background-color: $color-main;
+                width: 8px;
+                height: 8px;
+                display: inline-block;
+                margin-right: 5px;
+                margin-bottom: -10px;
+                border-radius:200px;
+                -moz-border-radius:200px;
+                -webkit-border-radius:200px;
+            }
         }
 
     }

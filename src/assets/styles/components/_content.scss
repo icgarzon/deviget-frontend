@@ -18,16 +18,26 @@
 
                 &__posts {
 
+                   
                     border:none;
                     list-style-type: none;
                     padding: 0;
                     margin: 0;
-                    margin-bottom: 150px !important;
+                    margin-bottom: 200px !important;
 
                     &__items {
+
+                        opacity: 0.4;
+                        filter: grayscale(100%);
                         border-top: none !important;
                         border-left: none !important;
                         border-right: none !important;
+
+                        &.not-read{
+                            opacity: 1;
+                            filter: grayscale(0);
+                        }
+
                     }
 
                 }
@@ -58,6 +68,16 @@
                 width: calc(100% - 2px) !important;
 
                 .page-link{ color:$color-main !important; }
+                
+                &--dismiss-all{
+                    color:$color-gray-1 !important;
+                    border-color:$color-gray-1 !important;
+                    &:hover{
+                        background-color: $color-white !important;
+                        color:$color-main !important;
+                        border-color:$color-main !important;
+                    }
+                }
                 
             }
 

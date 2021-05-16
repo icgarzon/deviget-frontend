@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import {
+  Button,
   Col, Container, ListGroup, Row,
 } from 'react-bootstrap';
 import { Header } from '../common/header';
@@ -8,7 +9,7 @@ import { Footer } from '../common/footer';
 import { PostCard } from '../post/list';
 import PostPagination from '../post/pagination';
 import { connect } from "react-redux";
-
+import Swal from 'sweetalert2';
 
 
 type AppProps = {
@@ -31,6 +32,22 @@ class Home extends React.Component<AppProps,AppState> {
     this.setState({ isLoaded:true });
   }
   
+
+  dismissAll(){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to continue',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Do it!',
+      confirmButtonColor: '#ff4600',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Saved!', '', 'success');
+      }
+    })
+  }
+
   render() {
 
     const { posts } = this.props;
@@ -51,19 +68,17 @@ class Home extends React.Component<AppProps,AppState> {
                 <Container fluid className="main-wrapper__contain__navigation-bar__wrap p-0">
                   <ListGroup className="main-wrapper__contain__navigation-bar__wrap__posts w-100">
                     {posts.map((item) => (
-                      <ListGroup.Item className="main-wrapper__contain__navigation-bar__wrap__posts__items p-0">
                         <PostCard {...item.data} />
-                      </ListGroup.Item>
                     ))}
                   </ListGroup>
                 </Container>
                 <Container className="main-wrapper__contain__navigation-bar__actions">
                   <Row>
                     <Col xs={7}>
-                      Dismiss All
+                      <Button variant="outline-dark" className="main-wrapper__contain__navigation-bar__actions--dismiss-all ml-2" onClick={ () => this.dismissAll() }>Dismiss All</Button>
                     </Col>
                     <Col xs={5} className="justify-content-end">
-                      <PostPagination pageNumber="1" />
+                      <PostPagination />
                     </Col>
                   </Row>
                 </Container>

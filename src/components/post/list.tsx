@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, ListGroup } from 'react-bootstrap';
 
 type CardProps = {
     id: string,
@@ -9,10 +9,18 @@ type CardProps = {
     thumbnail: string,
     num_comments: string,
 }
-export class PostCard extends Component<CardProps, {}> {
+
+type CardState = {
+    isRead: boolean
+}
+export class PostCard extends Component<CardProps, CardState> {
 
     constructor (props:CardProps) {
         super (props);
+
+        this.state = {
+            isRead:false
+        }
     }
 
     setClassImage(image:string){
@@ -62,40 +70,46 @@ export class PostCard extends Component<CardProps, {}> {
         
     }
 
+    showDetail(id:string){
+        this.setState({ isRead:true });
+    }
+
     render (){
 
         const { id, title, author, created, thumbnail, num_comments } = this.props;
 
         return (
             <>
-            <Container fluid className={ ( !title ? 'empty':'' ) + ' post-item animated' } >
-                <Row>
-                    <Col xs={4} className="p-0">
-                        <div className={ this.setClassImage(thumbnail) } style={{ backgroundImage: this.setBackgroundImage(thumbnail) }}></div>
-                    </Col>
-                    <Col xs={7} className="p-0 pl-3">
-                        <Container fluid className="post-item__body">
-                            <Row className="post-item__body__title">
-                                { author }
-                            </Row>
-                            <Row className="post-item__body__description text-truncate">
-                                { title }
-                            </Row>
-                            <Row className="post-item__body__more">
-                                <Col xs={8} className="p-0 post-item__body__more__comments">
-                                    { num_comments } comments
-                                </Col>
-                                <Col xs={4} className="p-0 post-item__body__more__created">
-                                    { this.setDateAgo(created) }
-                                </Col>
-                            </Row>
-                        </Container>
-                    </Col>
-                    <Col xs={1} className="p-0">
-                        <span className="post-item__go-to-button animated"></span>
-                    </Col>
-                </Row>
-            </Container>
+                <ListGroup.Item className={ 'main-wrapper__contain__navigation-bar__wrap__posts__items p-0 '+ ( !this.state.isRead ? ' not-read':'' ) } onClick={() => this.showDetail(id)} key={id}>
+                    <Container fluid className={ ( !title ? 'empty':'' ) + ' post-item animated '+ ( !this.state.isRead ? ' not-read':'')  } >
+                        <Row>
+                            <Col xs={4} className="p-0">
+                                <div className={ this.setClassImage(thumbnail) } style={{ backgroundImage: this.setBackgroundImage(thumbnail) }}></div>
+                            </Col>
+                            <Col xs={7} className="p-0 pl-3">
+                                <Container fluid className="post-item__body">
+                                    <Row className="post-item__body__title">
+                                        { author }
+                                    </Row>
+                                    <Row className="post-item__body__description text-truncate">
+                                        { title }
+                                    </Row>
+                                    <Row className="post-item__body__more">
+                                        <Col xs={8} className="p-0 post-item__body__more__comments">
+                                            { num_comments } comments
+                                        </Col>
+                                        <Col xs={4} className="p-0 post-item__body__more__created">
+                                            { this.setDateAgo(created) }
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </Col>
+                            <Col xs={1} className="p-0">
+                                <span className="post-item__go-to-button animated"></span>
+                            </Col>
+                        </Row>
+                    </Container>
+                </ListGroup.Item>
             </>
         )
         
