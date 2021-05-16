@@ -6,14 +6,13 @@ import {
 import { Header } from '../common/header';
 import { Footer } from '../common/footer';
 import { PostCard } from '../post/list';
+import PostPagination from '../post/pagination';
 import { connect } from "react-redux";
-import { getData } from '../../store/actions/';
 
 
 
 type AppProps = {
-  posts: Array<any>,
-  getData: Function
+  posts: Array<any>
 };
 
 type AppState = {
@@ -29,7 +28,6 @@ class Home extends React.Component<AppProps,AppState> {
   }
 
   componentDidMount() {
-    this.props.getData();
     this.setState({ isLoaded:true });
   }
   
@@ -50,15 +48,24 @@ class Home extends React.Component<AppProps,AppState> {
           <Container fluid className="main-wrapper p-0">
             <Row className="main-wrapper__contain p-0">
               <Col xs={3} md={4} lg={4} xl={3} className="main-wrapper__contain__navigation-bar p-0">
-                <ListGroup className="main-wrapper__contain__navigation-bar__posts w-100">
-                  {posts.map((item) => (
-                    <ListGroup.Item className="main-wrapper__contain__navigation-bar__posts__items p-0">
-                      <PostCard {...item.data} />
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-                <Container className="main-wrapper__contain__navigation-bar__actions w-100">
-                    Options
+                <Container fluid className="main-wrapper__contain__navigation-bar__wrap p-0">
+                  <ListGroup className="main-wrapper__contain__navigation-bar__wrap__posts w-100">
+                    {posts.map((item) => (
+                      <ListGroup.Item className="main-wrapper__contain__navigation-bar__wrap__posts__items p-0">
+                        <PostCard {...item.data} />
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                </Container>
+                <Container className="main-wrapper__contain__navigation-bar__actions">
+                  <Row>
+                    <Col xs={7}>
+                      Dismiss All
+                    </Col>
+                    <Col xs={5} className="justify-content-end">
+                      <PostPagination pageNumber="1" />
+                    </Col>
+                  </Row>
                 </Container>
               </Col>
               <Col xs={9} md={8} lg={8} xl={9} className="main-wrapper__contain__detail p-0">
@@ -85,4 +92,4 @@ const mapStateToProps = (state: { posts: any; }) => ({
   posts: state.posts
 })
 
-export default connect(mapStateToProps,{ getData })(Home);
+export default connect(mapStateToProps)(Home);

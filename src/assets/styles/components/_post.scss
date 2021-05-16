@@ -71,6 +71,7 @@
             &__created{
 
                 text-align: right;
+                white-space: nowrap;
 
                 &::before{
                     width: 12px;

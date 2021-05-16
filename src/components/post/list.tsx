@@ -26,10 +26,46 @@ export class PostCard extends Component<CardProps, {}> {
         return ''
     }
 
+    setDateAgo(date:any){
+
+        if(date){
+
+            var date_get = new Date(date*1000);
+            var date_now = new Date();
+            var diff_seconds = Math.abs(date_get.getTime() - date_now.getTime()) / 1000;
+            var suffix = 'ago';
+
+            // Days
+            var days = Math.floor(diff_seconds / 86400);
+            if(days > 0){ return `${days} d ${suffix}`; }
+            diff_seconds -= days * 86400;
+
+            // Hours
+            var hours = Math.floor(diff_seconds / 3600) % 24;
+            if(hours > 0){ return `${hours} h ${suffix}`; }
+            diff_seconds -= hours * 3600;
+
+            // Minutes
+            var minutes = Math.floor(diff_seconds / 60) % 60;
+            if(minutes > 0){ return `${minutes} min ${suffix}`; }
+            diff_seconds -= minutes * 60;
+            
+            // Seconds Left
+            var seconds = diff_seconds % 60;
+            if(seconds > 0){ return `${seconds} s ${suffix}`; }
+
+            return date_get.toString();
+
+        }
+
+        return '';
+        
+    }
+
     render (){
 
         const { id, title, author, created, thumbnail, num_comments } = this.props;
-        
+
         return (
             <>
             <Container fluid className={ ( !title ? 'empty':'' ) + ' post-item animated' } >
@@ -50,7 +86,7 @@ export class PostCard extends Component<CardProps, {}> {
                                     { num_comments } comments
                                 </Col>
                                 <Col xs={4} className="p-0 post-item__body__more__created">
-                                    { created }
+                                    { this.setDateAgo(created) }
                                 </Col>
                             </Row>
                         </Container>
