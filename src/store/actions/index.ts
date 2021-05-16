@@ -1,16 +1,21 @@
-import { DATA_LOADED, API_NEXT, PAGE_NUMBER } from "../constants/action-types";
+import { DATA_LOADED, API_NEXT, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL } from "../constants/action-types";
 
 type getDataProperties = {
     page:number,
     after:string
 };
 
+type dispatchAction = {
+    type: string;
+    payload: any;
+}
+
 export function getData( p:getDataProperties ){ 
 
     let get_params = '';
     if(p?.after){ get_params += `&after=${p.after}`; }
 
-    return function(dispatch: (arg0: { type: string; payload: any; }) => void) {
+    return function(dispatch:(arg0: dispatchAction) => void) {
         return fetch(`https://www.reddit.com/r/todayilearned/top.json?limit=50${get_params}`)
         .then(response => response.json())
         .then(json => {
@@ -23,3 +28,12 @@ export function getData( p:getDataProperties ){
     };
 
 }
+
+export const dismissItem = (payload: any) => ({
+    type: "DISMISS_ITEM",
+    payload
+});
+
+export const dismissAll = () => ({
+    type: "DISMISS_ALL"
+});

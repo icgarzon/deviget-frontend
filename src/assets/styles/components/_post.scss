@@ -46,6 +46,7 @@
         }
 
         &__more{
+
             font-size: 0.6rem;
             margin-top: 15px;
             color: $color-gray-1;
@@ -93,6 +94,44 @@
 
             }
 
+            &__dismiss{
+
+                display: none;
+                text-align: right;
+
+                &--button{
+
+                    padding:0;
+                    background-color: transparent !important;
+                    border: none !important;
+                    white-space: nowrap;
+                    font-size: 0.7rem !important;
+                    color:#000 !important;
+
+                    &::before{
+                        width: 12px;
+                        height: 12px;
+                        content:'';
+                        display: inline-block;
+                        margin: 0 3px -2px 0;
+                        background-image: url('../../images/post-dismiss.svg');
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        background-size: auto 100%;
+                    }
+
+                    &:hover{
+                        color:$color-main !important;
+                    }
+
+                    &:hover::before{
+                        background-size: auto 90%;
+                    }
+
+                }
+
+            }
+
         }
 
     }
@@ -100,13 +139,28 @@
 
     &:hover{
         background-color: #f2f5f6;
-
-        
     }
 
     &:hover &__thumbnail{
         opacity: 0.5;
     }
+
+    &:hover &__body {
+
+        &__more{
+
+            //opacity: 0.5;
+
+            &__created{
+                display: none;
+            }
+            &__dismiss{
+                display: block;
+            }
+        }
+    }
+
+    
 
 
     &__go-to-button{
@@ -125,9 +179,6 @@
     &:hover &__go-to-button{
         background-size: auto 70%;
     }
-
-
-
 
     &.empty &__thumbnail{
 

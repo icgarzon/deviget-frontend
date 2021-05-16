@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import { Container, Col, Row, ListGroup } from 'react-bootstrap';
+import { Container, Col, Row, ListGroup, Button } from 'react-bootstrap';
+import { connect } from "react-redux";
+import { dismissItem } from '../../store/actions';
+import Swal from 'sweetalert2';
 
 type CardProps = {
     id: string,
@@ -8,18 +11,21 @@ type CardProps = {
     created: string,
     thumbnail: string,
     num_comments: string,
+    dismissItem: Function
 }
 
 type CardState = {
-    isRead: boolean
+    isRead: boolean,
+    isDismissed: boolean
 }
-export class PostCard extends Component<CardProps, CardState> {
+class PostCard extends Component<CardProps, CardState> {
 
     constructor (props:CardProps) {
         super (props);
 
         this.state = {
-            isRead:false
+            isRead:false,
+            isDismissed:false
         }
     }
 
@@ -70,48 +76,87 @@ export class PostCard extends Component<CardProps, CardState> {
         
     }
 
-    showDetail(id:string){
+    showDetail(e:any,id:string){
         this.setState({ isRead:true });
+    }
+
+    setDismissed(e:any,id:string){
+
+        console.log('setDismissed');
+        e.stopPropagation();
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to continue',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Do it!',
+            confirmButtonColor: '#ff4600',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.props.dismissItem({ id:id });
+            }
+        })
+
     }
 
     render (){
 
-        const { id, title, author, created, thumbnail, num_comments } = this.props;
+        if(!this.state.isDismissed){
 
-        return (
-            <>
-                <ListGroup.Item className={ 'main-wrapper__contain__navigation-bar__wrap__posts__items p-0 '+ ( !this.state.isRead ? ' not-read':'' ) } onClick={() => this.showDetail(id)} key={id}>
-                    <Container fluid className={ ( !title ? 'empty':'' ) + ' post-item animated '+ ( !this.state.isRead ? ' not-read':'')  } >
-                        <Row>
-                            <Col xs={4} className="p-0">
-                                <div className={ this.setClassImage(thumbnail) } style={{ backgroundImage: this.setBackgroundImage(thumbnail) }}></div>
-                            </Col>
-                            <Col xs={7} className="p-0 pl-3">
-                                <Container fluid className="post-item__body">
-                                    <Row className="post-item__body__title">
-                                        { author }
-                                    </Row>
-                                    <Row className="post-item__body__description text-truncate">
-                                        { title }
-                                    </Row>
-                                    <Row className="post-item__body__more">
-                                        <Col xs={8} className="p-0 post-item__body__more__comments">
-                                            { num_comments } comments
-                                        </Col>
-                                        <Col xs={4} className="p-0 post-item__body__more__created">
-                                            { this.setDateAgo(created) }
-                                        </Col>
-                                    </Row>
-                                </Container>
-                            </Col>
-                            <Col xs={1} className="p-0">
-                                <span className="post-item__go-to-button animated"></span>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ListGroup.Item>
-            </>
-        )
+            const { id, title, author, created, thumbnail, num_comments } = this.props;
+
+            return (
+                <>
+                    <ListGroup.Item className={ 'main-wrapper__contain__navigation-bar__wrap__posts__items p-0 '+ ( !this.state.isRead ? ' not-read':'' ) } onClick={(e) => this.showDetail(e,id)} key={id}>
+                        <Container fluid className={ ( !title ? 'empty':'' ) + ' post-item animated '+ ( !this.state.isRead ? ' not-read':'')  } >
+                            <Row>
+                                <Col xs={4} className="p-0">
+                                    <div className={ this.setClassImage(thumbnail) } style={{ backgroundImage: this.setBackgroundImage(thumbnail) }}></div>
+                                </Col>
+                                <Col xs={7} className="p-0 pl-3">
+                                    <Container fluid className="post-item__body">
+                                        <Row className="post-item__body__title">
+                                            { author }
+                                        </Row>
+                                        <Row className="post-item__body__description text-truncate">
+                                        { id }{ title }
+                                        </Row>
+                                        <Row className="post-item__body__more">
+                                            <Col xs={8} className="p-0 post-item__body__more__comments">
+                                                { num_comments } comments
+                                            </Col>
+                                            <Col xs={4} className="p-0 post-item__body__more__created">
+                                                { this.setDateAgo(created) }
+                                            </Col>
+                                            <Col xs={4} className="p-0 post-item__body__more__dismiss">
+                                                <Button variant="outline-dark" className="post-item__body__more__dismiss--button p-0" 
+                                                        onClick={ (e) => this.setDismissed(e,id) }
+                                                        size="sm">
+                                                            Dismiss
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                </Col>
+                                <Col xs={1} className="p-0">
+                                    <span className="post-item__go-to-button animated"></span>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </ListGroup.Item>
+                </>
+            )
+
+        }
+
+        return (<></>);
         
     }
 }
+
+
+const mapStateToProps = (state:any) => ({
+})
+  
+export default connect(mapStateToProps,{ dismissItem })(PostCard);

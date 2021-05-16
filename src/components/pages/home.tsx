@@ -6,10 +6,10 @@ import {
 } from 'react-bootstrap';
 import { Header } from '../common/header';
 import { Footer } from '../common/footer';
-import { PostCard } from '../post/list';
+import PostCard from '../post/list';
 import PostPagination from '../post/pagination';
+import PostDismissAll from '../post/dismiss';
 import { connect } from "react-redux";
-import Swal from 'sweetalert2';
 
 
 type AppProps = {
@@ -31,22 +31,6 @@ class Home extends React.Component<AppProps,AppState> {
   componentDidMount() {
     this.setState({ isLoaded:true });
   }
-  
-
-  dismissAll(){
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to continue',
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonText: 'Do it!',
-      confirmButtonColor: '#ff4600',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('Saved!', '', 'success');
-      }
-    })
-  }
 
   render() {
 
@@ -66,16 +50,24 @@ class Home extends React.Component<AppProps,AppState> {
             <Row className="main-wrapper__contain p-0">
               <Col xs={3} md={4} lg={4} xl={3} className="main-wrapper__contain__navigation-bar p-0">
                 <Container fluid className="main-wrapper__contain__navigation-bar__wrap p-0">
-                  <ListGroup className="main-wrapper__contain__navigation-bar__wrap__posts w-100">
-                    {posts.map((item) => (
+                  <ListGroup className={ 'main-wrapper__contain__navigation-bar__wrap__posts w-100' + ( !posts ? ' empty':'' ) }>
+                    { 
+                    
+                      posts ? 
+                      posts.map((item) => (
                         <PostCard {...item.data} />
-                    ))}
+                      )) :  
+                        <div className="main-wrapper__contain__navigation-bar__wrap__posts__empty-message">
+                          <h2>No post <span>From api</span></h2>
+                        </div>
+                    
+                    }
                   </ListGroup>
                 </Container>
                 <Container className="main-wrapper__contain__navigation-bar__actions">
                   <Row>
                     <Col xs={7}>
-                      <Button variant="outline-dark" className="main-wrapper__contain__navigation-bar__actions--dismiss-all ml-2" onClick={ () => this.dismissAll() }>Dismiss All</Button>
+                      <PostDismissAll />
                     </Col>
                     <Col xs={5} className="justify-content-end">
                       <PostPagination />
