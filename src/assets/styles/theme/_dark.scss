@@ -1,0 +1,50 @@
+body {
+
+    &.dark{
+        background-color: $color-dark;
+
+        .list-group-item{
+            background-color: $color-dark;
+        }
+
+        .main-wrapper{
+            &__contain{
+                &__navigation-bar{
+                    &__actions{
+                        background-color: $color-dark;
+                    }
+                }
+            }
+
+            &__contain{
+                &__detail{
+                    &__empty{
+                        &__icon{
+                            background-image: url('../../images/select-call-to-white.svg');
+                        }
+
+                        h2{
+                            color:$color-white;
+                            span.subtitle{
+                                color:$color-white;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+        .main-header{
+            &__wrap{
+                &__logo{
+                    &__image {
+                        background-image: url('../../images/reddit-logo-white.svg');
+                    }
+                }
+            }
+        }
+
+    }
+    
+}

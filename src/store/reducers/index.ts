@@ -1,6 +1,7 @@
-import { DATA_LOADED, API_NEXT, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL, DETAIL_ITEM } from "../constants/action-types";
+import { SET_THEME, DATA_LOADED, API_NEXT, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL, DETAIL_ITEM } from "../constants/action-types";
 
 const initialState = {
+  theme: 'light',
   posts: [{},{},{},{},{},{},{},{},{},{},{},{},{},{}],
   detail:{
     id:null
@@ -13,20 +14,32 @@ const initialState = {
 
 function rootReducer(state = initialState, action: { type: string; payload: any; }) {
 
-  if (action.type === DATA_LOADED) {
+  if (action.type === SET_THEME) {
+
+    return Object.assign({}, state, {
+      theme: action.payload.theme
+    });
+
+  }else if (action.type === DATA_LOADED) {
+
     return Object.assign({}, state, {
       posts: action.payload
     });
+
   }else if (action.type === API_NEXT) {
+
     return Object.assign({}, state, {
       api:{
         after:action.payload
       }
     });
+
   }else if (action.type === PAGE_NUMBER) {
+
     return Object.assign({}, state, {
       page:action.payload
     });
+
   }else if (action.type === DISMISS_ITEM) {
 
     let new_posts = state.posts.filter((post:any)=>{ return post?.data?.id !== action.payload.id });

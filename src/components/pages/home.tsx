@@ -4,8 +4,8 @@ import {
   Button,
   Col, Container, ListGroup, Row,
 } from 'react-bootstrap';
-import { Header } from '../common/header';
 import { Footer } from '../common/footer';
+import Header from '../common/header';
 import PostCard from '../post/list';
 import PostPagination from '../post/pagination';
 import PostDismissAll from '../post/dismiss';
@@ -14,7 +14,8 @@ import { connect } from "react-redux";
 
 
 type AppProps = {
-  posts: Array<any>
+  posts: Array<any>,
+  theme: string
 };
 
 type AppState = {
@@ -35,9 +36,15 @@ class Home extends React.Component<AppProps,AppState> {
 
   render() {
 
-    const { posts } = this.props;
+    const { posts, theme } = this.props;
     const isOnLine = navigator.onLine;
 
+    if(theme == 'dark'){
+      document.body.classList.add('dark');
+    }else{
+      document.body.classList.remove('dark');
+    }
+    
     if (!this.state.isLoaded) {
 
       return <div>Loading...</div>;
@@ -47,7 +54,7 @@ class Home extends React.Component<AppProps,AppState> {
       return (
         <>
           <Header />
-          <Container fluid className="main-wrapper p-0">
+          <Container fluid className={ 'main-wrapper p-0' } >
             <Row className="main-wrapper__contain p-0">
               <Col xs={3} md={4} lg={4} xl={3} className="main-wrapper__contain__navigation-bar p-0">
                 <Container fluid className="main-wrapper__contain__navigation-bar__wrap p-0">
@@ -88,8 +95,9 @@ class Home extends React.Component<AppProps,AppState> {
   }
 }
 
-const mapStateToProps = (state: { posts: any; }) => ({
-  posts: state.posts
+const mapStateToProps = (state:any) => ({
+  posts: state.posts,
+  theme: state.theme
 })
 
 export default connect(mapStateToProps)(Home);

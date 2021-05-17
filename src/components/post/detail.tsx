@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import { Button } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { dismissAll } from '../../store/actions';
-import Swal from 'sweetalert2';
 
 type PostDetailProps = {
     id:string

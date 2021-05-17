@@ -1,4 +1,4 @@
-import { DATA_LOADED, API_NEXT, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL } from "../constants/action-types";
+import { SET_THEME, DATA_LOADED, API_NEXT, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL } from "../constants/action-types";
 
 type getDataProperties = {
     page:number,
@@ -9,6 +9,11 @@ type dispatchAction = {
     type: string;
     payload: any;
 }
+
+export const changeTheme = (payload: dispatchAction) => ({
+    type: "SET_THEME",
+    payload
+});
 
 export function getData( p:getDataProperties ){ 
 
@@ -29,13 +34,13 @@ export function getData( p:getDataProperties ){
 
 }
 
-export const detailItem = (payload: any) => ({
+export const detailItem = (payload: dispatchAction) => ({
     type: "DETAIL_ITEM",
     payload
 });
 
 
-export const dismissItem = (payload: any) => ({
+export const dismissItem = (payload: dispatchAction) => ({
     type: "DISMISS_ITEM",
     payload
 });
