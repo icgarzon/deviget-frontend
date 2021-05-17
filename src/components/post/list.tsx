@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { Container, Col, Row, ListGroup, Button } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { dismissItem } from '../../store/actions';
+import { dismissItem, detailItem } from '../../store/actions';
 import Swal from 'sweetalert2';
+import { Animated } from 'react-animated-css';
 
 type CardProps = {
     id: string,
@@ -11,12 +12,14 @@ type CardProps = {
     created: string,
     thumbnail: string,
     num_comments: string,
-    dismissItem: Function
+    dismissItem: Function,
+    detailItem: Function
 }
 
 type CardState = {
     isRead: boolean,
-    isDismissed: boolean
+    isDismissed: boolean,
+    isHide: boolean
 }
 class PostCard extends Component<CardProps, CardState> {
 
@@ -25,8 +28,13 @@ class PostCard extends Component<CardProps, CardState> {
 
         this.state = {
             isRead:false,
-            isDismissed:false
+            isDismissed:false,
+            isHide:false
         }
+    }
+
+    componentWillUnmount() {
+        this.setState({ isHide:true });
     }
 
     setClassImage(image:string){
@@ -78,11 +86,11 @@ class PostCard extends Component<CardProps, CardState> {
 
     showDetail(e:any,id:string){
         this.setState({ isRead:true });
+        this.props.detailItem({ id:id });
     }
 
     setDismissed(e:any,id:string){
 
-        console.log('setDismissed');
         e.stopPropagation();
 
         Swal.fire({
@@ -94,7 +102,11 @@ class PostCard extends Component<CardProps, CardState> {
             confirmButtonColor: '#ff4600',
         }).then((result) => {
             if (result.isConfirmed) {
-                this.props.dismissItem({ id:id });
+                this.setState({ isDismissed:true });
+                setTimeout(() => {
+                    this.props.dismissItem({ id:id });
+                },
+                700);
             }
         })
 
@@ -102,13 +114,13 @@ class PostCard extends Component<CardProps, CardState> {
 
     render (){
 
-        if(!this.state.isDismissed){
+        const { id, title, author, created, thumbnail, num_comments } = this.props;
 
-            const { id, title, author, created, thumbnail, num_comments } = this.props;
-
+        if(!this.state.isHide){
             return (
                 <>
-                    <ListGroup.Item className={ 'main-wrapper__contain__navigation-bar__wrap__posts__items p-0 '+ ( !this.state.isRead ? ' not-read':'' ) } onClick={(e) => this.showDetail(e,id)} key={id}>
+                <Animated animationIn="fadeIn" animationOut="bounceOutUp" isVisible={ !this.state.isDismissed ? true : false } key={id}>
+                    <ListGroup.Item className={ 'main-wrapper__contain__navigation-bar__wrap__posts__items p-0 '+ ( !this.state.isRead ? ' not-read':'' ) } onClick={(e) => this.showDetail(e,id)}>
                         <Container fluid className={ ( !title ? 'empty':'' ) + ' post-item animated '+ ( !this.state.isRead ? ' not-read':'')  } >
                             <Row>
                                 <Col xs={4} className="p-0">
@@ -145,12 +157,12 @@ class PostCard extends Component<CardProps, CardState> {
                             </Row>
                         </Container>
                     </ListGroup.Item>
+                </Animated>
                 </>
             )
-
+        }else{
+            return (<></>);
         }
-
-        return (<></>);
         
     }
 }
@@ -159,4 +171,4 @@ class PostCard extends Component<CardProps, CardState> {
 const mapStateToProps = (state:any) => ({
 })
   
-export default connect(mapStateToProps,{ dismissItem })(PostCard);
+export default connect(mapStateToProps,{ dismissItem, detailItem })(PostCard);

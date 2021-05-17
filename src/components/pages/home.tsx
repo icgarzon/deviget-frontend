@@ -9,6 +9,7 @@ import { Footer } from '../common/footer';
 import PostCard from '../post/list';
 import PostPagination from '../post/pagination';
 import PostDismissAll from '../post/dismiss';
+import PostDetail from '../post/detail';
 import { connect } from "react-redux";
 
 
@@ -50,17 +51,15 @@ class Home extends React.Component<AppProps,AppState> {
             <Row className="main-wrapper__contain p-0">
               <Col xs={3} md={4} lg={4} xl={3} className="main-wrapper__contain__navigation-bar p-0">
                 <Container fluid className="main-wrapper__contain__navigation-bar__wrap p-0">
-                  <ListGroup className={ 'main-wrapper__contain__navigation-bar__wrap__posts w-100' + ( !posts ? ' empty':'' ) }>
+                  <ListGroup className={ 'main-wrapper__contain__navigation-bar__wrap__posts w-100' + ( !posts || posts.length == 0 ? ' empty':'' ) }>
                     { 
-                    
-                      posts ? 
+                      posts && posts.length > 0 ? 
                       posts.map((item) => (
-                        <PostCard {...item.data} />
+                        <PostCard {...item.data} key={item?.data?.id} />
                       )) :  
                         <div className="main-wrapper__contain__navigation-bar__wrap__posts__empty-message">
                           <h2>No post <span>From api</span></h2>
                         </div>
-                    
                     }
                   </ListGroup>
                 </Container>
@@ -76,13 +75,7 @@ class Home extends React.Component<AppProps,AppState> {
                 </Container>
               </Col>
               <Col xs={9} md={8} lg={8} xl={9} className="main-wrapper__contain__detail p-0">
-                <div className="main-wrapper__contain__detail__empty">
-                  <div className="main-wrapper__contain__detail__empty__icon"></div>
-                  <h2>
-                    Select a <span className="emphasys">item</span>
-                    <span className="subtitle">To view the detail</span>
-                  </h2>
-                </div>
+                  <PostDetail />
               </Col>
             </Row>
           </Container>

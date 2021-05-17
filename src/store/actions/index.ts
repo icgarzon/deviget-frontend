@@ -29,6 +29,12 @@ export function getData( p:getDataProperties ){
 
 }
 
+export const detailItem = (payload: any) => ({
+    type: "DETAIL_ITEM",
+    payload
+});
+
+
 export const dismissItem = (payload: any) => ({
     type: "DISMISS_ITEM",
     payload

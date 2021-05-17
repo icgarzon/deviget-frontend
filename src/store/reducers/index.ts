@@ -1,7 +1,10 @@
-import { DATA_LOADED, API_NEXT, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL } from "../constants/action-types";
+import { DATA_LOADED, API_NEXT, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL, DETAIL_ITEM } from "../constants/action-types";
 
 const initialState = {
   posts: [{},{},{},{},{},{},{},{},{},{},{},{},{},{}],
+  detail:{
+    id:null
+  },
   api:{ 
     after:'' 
   },
@@ -24,18 +27,26 @@ function rootReducer(state = initialState, action: { type: string; payload: any;
     return Object.assign({}, state, {
       page:action.payload
     });
-  }else if (action.type === DISMISS_ITEM) { 
-    
-    console.log('REMOVE:', action.payload);
-    
+  }else if (action.type === DISMISS_ITEM) {
+
+    let new_posts = state.posts.filter((post:any)=>{ return post?.data?.id !== action.payload.id });
+
     return Object.assign({}, state, {
-      //posts:action.payload
+      posts : new_posts
     });
 
   }else if (action.type === DISMISS_ALL) {
+    
     return Object.assign({}, state, {
       posts:action.payload
     });
+
+  }else if (action.type === DETAIL_ITEM) {
+
+    return Object.assign({}, state, {
+      detail:{ id:action.payload.id }
+    });
+
   }
 
   return state;
