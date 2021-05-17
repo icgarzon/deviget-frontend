@@ -6,6 +6,7 @@ import { getData } from '../../store/actions/';
 type PaginationProps = {
     page: number,
     after: string,
+    prev: string,
     getData: Function,
 }
 
@@ -31,6 +32,11 @@ class PostPagination extends Component<PaginationProps, PaginationState> {
         this.props.getData({ page:this.props.page, after:this.props.after });
     }
 
+    prevPage(){
+        this.setState({ isLoading:true });
+        this.props.getData({ page:this.props.page, prev:this.props.prev });
+    }
+
     render (){
 
         const { page } = this.props;
@@ -38,9 +44,17 @@ class PostPagination extends Component<PaginationProps, PaginationState> {
         return (
             <>
                 <Pagination className="justify-content-end">
-                    <Pagination.Prev />
+                    {
+                        this.props.prev ? 
+                        <Pagination.Prev onClick={ () => this.prevPage() } />
+                        : ''
+                    }
                     <Pagination.Item disabled>{ page }</Pagination.Item>
-                    <Pagination.Next onClick={ () => this.nextPage() } />
+                    {
+                        this.props.after ? 
+                        <Pagination.Next onClick={ () => this.nextPage() } />
+                        : ''
+                    }
                 </Pagination>
             </>
         )
@@ -52,7 +66,8 @@ class PostPagination extends Component<PaginationProps, PaginationState> {
 
 const mapStateToProps = (state:any) => ({
     page: state.page,
-    after: state.api.after
+    after: state.api.after,
+    prev: state.api.prev
 })
   
 export default connect(mapStateToProps,{ getData })(PostPagination);

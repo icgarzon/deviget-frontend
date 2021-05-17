@@ -1,4 +1,4 @@
-import { SET_THEME, DATA_LOADED, API_NEXT, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL, DETAIL_ITEM } from "../constants/action-types";
+import { SET_THEME, DATA_LOADED, API_DATA, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL, DETAIL_ITEM } from "../constants/action-types";
 
 const initialState = {
   theme: 'light',
@@ -26,11 +26,12 @@ function rootReducer(state = initialState, action: { type: string; payload: any;
       posts: action.payload
     });
 
-  }else if (action.type === API_NEXT) {
+  }else if (action.type === API_DATA) {
 
     return Object.assign({}, state, {
       api:{
-        after:action.payload
+        after:action.payload.after,
+        prev:action.payload.prev,
       }
     });
 

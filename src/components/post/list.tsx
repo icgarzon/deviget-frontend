@@ -132,7 +132,7 @@ class PostCard extends Component<CardProps, CardState> {
                                             { author }
                                         </Row>
                                         <Row className="post-item__body__description text-truncate">
-                                        { id }{ title }
+                                        { title }
                                         </Row>
                                         <Row className="post-item__body__more">
                                             <Col xs={8} className="p-0 post-item__body__more__comments">
