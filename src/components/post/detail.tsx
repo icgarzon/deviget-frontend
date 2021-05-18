@@ -85,7 +85,7 @@ class PostDetail extends Component<PostDetailProps, PostDetailState> {
                 <div className="main-wrapper__contain__detail__wrap__empty__icon"></div>
                 <h2>
                     Select a <span className="emphasys">item</span>
-                    <span className="subtitle">{ id ? id : '' } To view the detail</span>
+                    <span className="subtitle">To view the detail</span>
                 </h2>
                 </div>
             </>
