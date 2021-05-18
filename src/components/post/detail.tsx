@@ -52,7 +52,7 @@ class PostDetail extends Component<PostDetailProps, PostDetailState> {
                             <Card>
                                 <Card.Header>{ data?.author ? data.author : '' }</Card.Header>
                                 <div className={ 'main-wrapper__contain__detail__wrap__content__image ' + this.setClassImage(data.thumbnail) }>
-                                    <Card.Img variant="top" src={ data?.thumbnail ? data.thumbnail : '' } height="200" />
+                                    <Card.Img variant="top" src={ data?.thumbnail && data.thumbnail != 'default' ? data.thumbnail : '' } height="200" />
                                     <div className="main-wrapper__contain__detail__wrap__content__image__blur" style={{ backgroundImage: this.setBackgroundImage(data.thumbnail) }}></div>
                                 </div>
                                 <Card.Body>

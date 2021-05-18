@@ -178,7 +178,17 @@
                             z-index: 1;
                         }
 
+                        &.no-image{
+                            background-image: url('../../images/post-broken-image.svg');
+                            background-size: auto 40%;
+                            background-position: center center;
+                            opacity: 0.3;
+                            background-color: $color-gray-0;
+                            background-repeat: no-repeat;
+                        }
+
                     }
+                    
 
                     .card-subtitle{
                         font-size: 0.8rem;
