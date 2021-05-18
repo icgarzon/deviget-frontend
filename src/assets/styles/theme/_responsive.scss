@@ -32,5 +32,55 @@
 
 @media(max-width: 767px) {
     
+    .main-header{
+        &__wrap{
+            &__menu{
+                display: block !important;
+            }
+        }
+    }
+
+
+    .main-wrapper{
+
+        &__contain{
+
+            &__navigation-bar{
+
+                display: none !important;
+                position: fixed;
+                top: 0;
+                pointer-events: none;
+                
+                &__actions{
+                    bottom: 65px !important;
+                }
+            }
+
+            &__detail{
+                &__wrap {
+                    &__content{
+                        width: 70% !important;
+                        margin-top: 30px !important;
+                    }
+                }
+            }
+            
+        }
+
+    }
+
+    body.nav-opened{
+
+        .main-wrapper{
+            &__contain{
+                &__navigation-bar{
+                    display: block !important;
+                    pointer-events: all;
+                }
+            }
+        }
+
+    }
 
 }

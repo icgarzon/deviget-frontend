@@ -15,7 +15,8 @@ import { connect } from "react-redux";
 
 type AppProps = {
   posts: Array<any>,
-  theme: string
+  theme: string,
+  menu: boolean
 };
 
 type AppState = {
@@ -36,13 +37,19 @@ class Home extends React.Component<AppProps,AppState> {
 
   render() {
 
-    const { posts, theme } = this.props;
+    const { posts, theme, menu } = this.props;
     const isOnLine = navigator.onLine;
 
     if(theme == 'dark'){
       document.body.classList.add('dark');
     }else{
       document.body.classList.remove('dark');
+    }
+
+    if(menu){
+      document.body.classList.add('nav-opened');
+    }else{
+      document.body.classList.remove('nav-opened');
     }
     
     if (!this.state.isLoaded) {
@@ -56,7 +63,7 @@ class Home extends React.Component<AppProps,AppState> {
           <Header />
           <Container fluid className={ 'main-wrapper p-0' } >
             <Row className="main-wrapper__contain p-0">
-              <Col xs={3} md={4} lg={4} xl={3} className="main-wrapper__contain__navigation-bar p-0">
+              <Col xs={12} md={4} lg={4} xl={3} className="main-wrapper__contain__navigation-bar p-0">
                 <Container fluid className="main-wrapper__contain__navigation-bar__wrap p-0">
                   <ListGroup className={ 'main-wrapper__contain__navigation-bar__wrap__posts w-100' + ( !posts || posts.length == 0 ? ' empty':'' ) }>
                     { 
@@ -81,7 +88,7 @@ class Home extends React.Component<AppProps,AppState> {
                   </Row>
                 </Container>
               </Col>
-              <Col xs={9} md={8} lg={8} xl={9} className="main-wrapper__contain__detail p-0">
+              <Col xs={12} md={8} lg={8} xl={9} className="main-wrapper__contain__detail p-0">
                 <Container fluid className="main-wrapper__contain__detail__wrap p-0">    
                   <PostDetail />
                 </Container>
@@ -99,7 +106,8 @@ class Home extends React.Component<AppProps,AppState> {
 
 const mapStateToProps = (state:any) => ({
   posts: state.posts,
-  theme: state.theme
+  theme: state.theme,
+  menu: state.menu
 })
 
 export default connect(mapStateToProps)(Home);

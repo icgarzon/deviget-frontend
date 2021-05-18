@@ -1,4 +1,4 @@
-import { SET_THEME, DATA_LOADED, API_DATA, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL } from "../constants/action-types";
+import { SHOW_MENU, SET_THEME, DATA_LOADED, API_DATA, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL } from "../constants/action-types";
 
 type getDataProperties = {
     page:number,
@@ -10,6 +10,11 @@ type dispatchAction = {
     type: string;
     payload: any;
 }
+
+export const showMenu = (payload: dispatchAction) => ({
+    type: "SHOW_MENU",
+    payload
+});
 
 export const changeTheme = (payload: dispatchAction) => ({
     type: "SET_THEME",

@@ -1,6 +1,7 @@
-import { SET_THEME, DATA_LOADED, API_DATA, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL, DETAIL_ITEM } from "../constants/action-types";
+import { SHOW_MENU, SET_THEME, DATA_LOADED, API_DATA, PAGE_NUMBER, DISMISS_ITEM, DISMISS_ALL, DETAIL_ITEM } from "../constants/action-types";
 
 const initialState = {
+  menu: false,
   theme: 'light',
   posts: [{},{},{},{},{},{},{},{},{},{},{},{},{},{}],
   detail:{
@@ -14,7 +15,13 @@ const initialState = {
 
 function rootReducer(state = initialState, action: { type: string; payload: any; }) {
 
-  if (action.type === SET_THEME) {
+  if (action.type === SHOW_MENU) {
+
+    return Object.assign({}, state, {
+      menu: state.menu ? false : true
+    });
+
+  }else if (action.type === SET_THEME) {
 
     return Object.assign({}, state, {
       theme: action.payload.theme

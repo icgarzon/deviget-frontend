@@ -1,38 +1,101 @@
 body {
 
     &.dark{
+
         background-color: $color-dark;
+
+        .main-header{
+            border-bottom-color: $color-gray-3;
+        }
 
         .list-group-item{
             background-color: $color-dark;
         }
 
         .main-wrapper{
-            &__contain{
-                &__navigation-bar{
-                    &__actions{
-                        background-color: $color-dark;
-                    }
-                }
-            }
 
             &__contain{
-                &__detail{
-                    &__empty{
-                        &__icon{
-                            background-image: url('../../images/select-call-to-white.svg');
+            
+                &__navigation-bar{
+
+                    &__wrap{
+                        
+                        border-right-color: $color-gray-3;
+                        
+                        &__posts__items{
+                            border-bottom-color: $color-gray-3;
                         }
 
-                        h2{
-                            color:$color-white;
-                            span.subtitle{
-                                color:$color-white;
+                        &::-webkit-scrollbar-track{
+                            background-color: $color-gray-3;
+                        }
+        
+                        &::-webkit-scrollbar{
+                            background-color: $color-gray-3;
+                        }
+
+                    }
+
+                    &__actions{
+                        background-color: $color-dark;
+
+                        .page-item{
+                            .page-link{
+                                background-color: transparent !important;
+                                border-color: $color-gray-3;
+                            }
+                        }
+
+                        &--dismiss-all{
+                            color:$color-gray-3 !important;
+                            border-color:$color-gray-3 !important;
+                            &:hover{
+                                background-color: transparent !important;
+                                color:$color-main !important;
+                                border-color:$color-main !important;
                             }
                         }
 
                     }
                 }
+
+                &__detail{
+                    
+                    &__wrap {
+                        
+                        &__empty{
+                            &__icon{
+                                background-image: url('../../images/select-call-to-white.svg');
+                            }
+
+                            h2{
+                                color:$color-white;
+                                span.subtitle{
+                                    color:$color-white;
+                                }
+                            }
+
+                        }
+
+                        &__content{
+                            .card{
+
+                                background-color: $color-gray-4 !important;
+                                color: $color-white;
+
+                                .card-header{ 
+                                    background-color: transparent !important;
+                                }
+
+                            }
+                        }
+
+                    }
+
+                }
+
             }
+
         }
 
         .main-header{
@@ -42,9 +105,48 @@ body {
                         background-image: url('../../images/reddit-logo-white.svg');
                     }
                 }
+                &__theme-mode {
+                    color:$color-white;
+                }
             }
         }
 
     }
+
+
+    .post-item{
+
+        &__thumbnail{
+            &.no-image{
+                background-image: url('../../images/post-broken-image-white.svg');
+                opacity: 0.7;
+                background-color: #353535;
+            }
+        }
+
+        &__body{
+            &__description{
+                color:$color-white
+            }
+
+            &__more{
+                &__comments{
+                    &::before{
+                        background-image: url('../../images/comments-white.svg') !important;
+                    }
+                }
     
+                &__created{
+                    &::before{
+                        background-image: url('../../images/post-date-white.svg');
+                    }
+                }
+            }
+        }
+
+        &:hover{
+            background-color: $color-gray-3;
+        }
+
+    }
 }

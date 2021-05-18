@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Container, Col, Row, ListGroup, Button } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { dismissItem, detailItem } from '../../store/actions';
+import { dismissItem, detailItem, showMenu } from '../../store/actions';
 import Swal from 'sweetalert2';
 import { Animated } from 'react-animated-css';
 
@@ -13,7 +13,8 @@ type CardProps = {
     thumbnail: string,
     num_comments: string,
     dismissItem: Function,
-    detailItem: Function
+    detailItem: Function,
+    showMenu: Function
 }
 
 type CardState = {
@@ -85,6 +86,7 @@ class PostCard extends Component<CardProps, CardState> {
     }
 
     showDetail(e:any,id:string){
+        this.setNavMenu();
         this.setState({ isRead:true });
         this.props.detailItem({ id:id });
     }
@@ -105,11 +107,14 @@ class PostCard extends Component<CardProps, CardState> {
                 this.setState({ isDismissed:true });
                 setTimeout(() => {
                     this.props.dismissItem({ id:id });
-                },
-                700);
+                },700);
             }
         })
 
+    }
+
+    setNavMenu = ()=>{
+        this.props.showMenu();
     }
 
     render (){
@@ -171,4 +176,4 @@ class PostCard extends Component<CardProps, CardState> {
 const mapStateToProps = (state:any) => ({
 })
   
-export default connect(mapStateToProps,{ dismissItem, detailItem })(PostCard);
+export default connect(mapStateToProps,{ dismissItem, detailItem, showMenu })(PostCard);

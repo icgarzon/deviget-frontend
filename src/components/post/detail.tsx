@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Card, Container, Row } from 'react-bootstrap';
+import { Animated } from 'react-animated-css';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 import { connect } from "react-redux";
 
 type PostDetailProps = {
@@ -19,10 +20,10 @@ class PostDetail extends Component<PostDetailProps, PostDetailState> {
             isLoading: false
         }
     }
-
+    
     getPostDetail(id:string){
-        if(this?.props?.posts){
-            return this.props.posts.filter((post:any)=>{ return post?.data?.id === id })[0].data;
+        if(this?.props?.posts && id){
+            return this.props.posts.filter((post:any)=>{ return post?.data?.id === id })[0]?.data;
         }
     }
 
@@ -43,45 +44,53 @@ class PostDetail extends Component<PostDetailProps, PostDetailState> {
 
         if(id){
 
-            const data = this.getPostDetail(id); console.log(data);
+            const data = this.getPostDetail(id);
 
-            return (
-                <>
-                    <Container className="main-wrapper__contain__detail__wrap__content">
-                        <Row>
-                            <Card>
-                                <Card.Header>{ data?.author ? data.author : '' }</Card.Header>
-                                <div className={ 'main-wrapper__contain__detail__wrap__content__image ' + this.setClassImage(data.thumbnail) }>
-                                    <Card.Img variant="top" src={ data?.thumbnail && data.thumbnail != 'default' ? data.thumbnail : '' } height="200" />
-                                    <div className="main-wrapper__contain__detail__wrap__content__image__blur" style={{ backgroundImage: this.setBackgroundImage(data.thumbnail) }}></div>
-                                </div>
-                                <Card.Body>
-                                    <Card.Subtitle className="mb-2 text-muted">{ data?.domain ? data.domain : '' }</Card.Subtitle>
-                                    <Card.Text>
-                                    { data?.title ? data.title : '' }
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Row>
-                    </Container>
-                </>
-            )
+            if(data?.author){
 
-        }else{
-            
-            return (
-                <>
-                    <div className="main-wrapper__contain__detail__wrap__empty">
-                    <div className="main-wrapper__contain__detail__wrap__empty__icon"></div>
-                    <h2>
-                        Select a <span className="emphasys">item</span>
-                        <span className="subtitle">{ id ? id : '' } To view the detail</span>
-                    </h2>
-                    </div>
-                </>
-            )
+                return (
+                    <>
+                        <Animated animationIn="bounceInDown" animationOut="bounceOutUp" isVisible={ !this.state.isLoading ? true : false } >
+                            <Container fluid className="main-wrapper__contain__detail__wrap__content p-0">
+                                <Row className="justify-content-center">
+                                    <Col md={7} lg={7}>
+                                        <Card>
+                                            <Card.Header>{ data?.author ? data.author : '' }</Card.Header>
+                                            <div className={ 'main-wrapper__contain__detail__wrap__content__image ' + this.setClassImage(data.thumbnail) }>
+                                                <Card.Img variant="top" src={ data?.thumbnail && data.thumbnail != 'default' ? data.thumbnail : '' } height="200" />
+                                                <div className="main-wrapper__contain__detail__wrap__content__image__blur" style={{ backgroundImage: this.setBackgroundImage(data.thumbnail) }}></div>
+                                            </div>
+                                            <Card.Body>
+                                                <Card.Subtitle className="mb-2 text-muted">{ data?.domain ? data.domain : '' }</Card.Subtitle>
+                                                <Card.Text>
+                                                { data?.title ? data.title : '' }
+                                                </Card.Text>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </Animated>
+                    </>
+
+                )
+
+            }
 
         }
+
+        return (
+            <>
+                <div className="main-wrapper__contain__detail__wrap__empty">
+                <div className="main-wrapper__contain__detail__wrap__empty__icon"></div>
+                <h2>
+                    Select a <span className="emphasys">item</span>
+                    <span className="subtitle">{ id ? id : '' } To view the detail</span>
+                </h2>
+                </div>
+            </>
+        )
+
     }
 }
 

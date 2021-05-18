@@ -76,9 +76,8 @@
                             height: 150px;
                             display: block;
                             background-image: url('../../images/post-empty.svg');
-                            background-size: auto 60%;
-                            background-position: center center;
-                            background-repeat: no-repeat;
+                            @extend .standar-bckg;
+                            background-size: auto 60% !important;
                             opacity: 0.15;
                             margin-left: auto;
                             margin-right: auto;
@@ -147,7 +146,6 @@
 
                     margin-top: 50px;
                     margin-bottom: 1000px;
-                    width: 70% !important;
 
                     &__image{
 
@@ -180,11 +178,10 @@
 
                         &.no-image{
                             background-image: url('../../images/post-broken-image.svg');
-                            background-size: auto 40%;
-                            background-position: center center;
+                            @extend .standar-bckg;
+                            background-size: auto 40% !important;
                             opacity: 0.3;
                             background-color: $color-gray-0;
-                            background-repeat: no-repeat;
                         }
 
                     }
@@ -211,9 +208,8 @@
                         width: 200px;
                         height: 200px;
                         background-image: url('../../images/select-call-to.svg');
-                        background-size: auto 90%;
-                        background-position: center center;
-                        background-repeat: no-repeat;
+                        @extend .standar-bckg;
+                        background-size: auto 90% !important;
                         opacity: 0.2;
                     }
 

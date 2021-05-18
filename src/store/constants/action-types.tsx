@@ -1,3 +1,4 @@
+export const SHOW_MENU = "SHOW_MENU";
 export const SET_THEME = "SET_THEME";
 export const DATA_LOADED = "DATA_LOADED";
 export const API_DATA = "API_DATA";
