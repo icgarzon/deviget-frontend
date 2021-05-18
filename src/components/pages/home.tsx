@@ -82,7 +82,9 @@ class Home extends React.Component<AppProps,AppState> {
                 </Container>
               </Col>
               <Col xs={9} md={8} lg={8} xl={9} className="main-wrapper__contain__detail p-0">
+                <Container fluid className="main-wrapper__contain__detail__wrap p-0">    
                   <PostDetail />
+                </Container>
               </Col>
             </Row>
           </Container>
