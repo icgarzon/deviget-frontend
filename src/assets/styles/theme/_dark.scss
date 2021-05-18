@@ -22,8 +22,16 @@ body {
                         
                         border-right-color: $color-gray-3;
                         
-                        &__posts__items{
-                            border-bottom-color: $color-gray-3;
+                        &__posts{
+                            &__items{
+
+                                border-bottom-color: $color-gray-3;
+
+                                &.active-detail{
+                                    background-color: $color-gray-3 !important;
+                                }
+                                
+                            }
                         }
 
                         &::-webkit-scrollbar-track{
@@ -111,42 +119,49 @@ body {
             }
         }
 
-    }
-
-
-    .post-item{
-
-        &__thumbnail{
-            &.no-image{
-                background-image: url('../../images/post-broken-image-white.svg');
-                opacity: 0.7;
-                background-color: #353535;
-            }
-        }
-
-        &__body{
-            &__description{
-                color:$color-white
-            }
-
-            &__more{
-                &__comments{
-                    &::before{
-                        background-image: url('../../images/comments-white.svg') !important;
-                    }
-                }
     
-                &__created{
-                    &::before{
-                        background-image: url('../../images/post-date-white.svg');
+
+
+        .post-item{
+
+            &__thumbnail{
+                &.no-image{
+                    background-image: url('../../images/post-broken-image-white.svg');
+                    opacity: 0.7;
+                    background-color: #353535;
+                }
+            }
+
+            &__body{
+                &__description{
+                    color:$color-white
+                }
+
+                &__more{
+                    &__comments{
+                        &::before{
+                            background-image: url('../../images/comments-white.svg') !important;
+                        }
+                    }
+        
+                    &__created{
+                        &::before{
+                            background-image: url('../../images/post-date-white.svg');
+                        }
                     }
                 }
             }
-        }
 
-        &:hover{
-            background-color: $color-gray-3;
-        }
+            &:hover{
+                background-color: $color-gray-3 !important;
+            }
 
+            &__go-to-button{
+                background-image: url('../../images/post-right-white.svg');
+            }
+
+        }
+    
     }
+
 }

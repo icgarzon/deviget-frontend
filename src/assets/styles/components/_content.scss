@@ -38,6 +38,10 @@
                             filter: grayscale(0);
                         }
 
+                        &.active-detail{
+                            background-color: #f2f5f6 !important;
+                        }
+
                     }
 
                     &.empty{

@@ -12,6 +12,7 @@ type CardProps = {
     created: string,
     thumbnail: string,
     num_comments: string,
+    current: string,
     dismissItem: Function,
     detailItem: Function,
     showMenu: Function
@@ -117,15 +118,29 @@ class PostCard extends Component<CardProps, CardState> {
         this.props.showMenu();
     }
 
+    isActive(id:string){
+        if(this?.props?.current && id && this.props.current == id){
+            return true;
+        }
+        return false;
+    }
+
     render (){
 
-        const { id, title, author, created, thumbnail, num_comments } = this.props;
+        const { id, title, author, created, thumbnail, num_comments, current } = this.props;
 
         if(!this.state.isHide){
             return (
                 <>
                 <Animated animationIn="fadeIn" animationOut="bounceOutUp" isVisible={ !this.state.isDismissed ? true : false } key={id}>
-                    <ListGroup.Item className={ 'main-wrapper__contain__navigation-bar__wrap__posts__items p-0 '+ ( !this.state.isRead ? ' not-read':'' ) } onClick={(e) => this.showDetail(e,id)}>
+                    <ListGroup.Item 
+                        className={ 
+                            'main-wrapper__contain__navigation-bar__wrap__posts__items p-0 ' + 
+                            ( !this.state.isRead || this.isActive(id) ? ' not-read':'' ) +
+                            ( this.isActive(id) ? ' active-detail' : '' )
+                        } 
+                        onClick={(e) => this.showDetail(e,id)}
+                    >
                         <Container fluid className={ ( !title ? 'empty':'' ) + ' post-item animated '+ ( !this.state.isRead ? ' not-read':'')  } >
                             <Row>
                                 <Col xs={4} className="p-0">
@@ -174,6 +189,7 @@ class PostCard extends Component<CardProps, CardState> {
 
 
 const mapStateToProps = (state:any) => ({
+    current: state.detail.id
 })
   
 export default connect(mapStateToProps,{ dismissItem, detailItem, showMenu })(PostCard);
