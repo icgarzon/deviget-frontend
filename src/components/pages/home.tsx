@@ -65,12 +65,13 @@ class Home extends React.Component<AppProps,AppState> {
             <Row className="main-wrapper__contain p-0">
               <Col xs={12} md={4} lg={4} xl={3} className="main-wrapper__contain__navigation-bar p-0">
                 <Container fluid className="main-wrapper__contain__navigation-bar__wrap p-0">
-                  <ListGroup className={ 'main-wrapper__contain__navigation-bar__wrap__posts w-100' + ( !posts || posts.length == 0 ? ' empty':'' ) }>
+                  <ListGroup key="list-posts-items" className={ 'main-wrapper__contain__navigation-bar__wrap__posts w-100' + ( !posts || posts.length == 0 ? ' empty':'' ) }>
                     { 
                       posts && posts.length > 0 ? 
-                      posts.map((item) => (
-                        <PostCard {...item.data} key={item?.data?.id} />
-                      )) :  
+
+                      posts.map((item, idx) => {
+                        return ( <PostCard key={item?.data?.id ? item?.data?.id : idx} {...item.data} /> );
+                      }) :  
                         <div className="main-wrapper__contain__navigation-bar__wrap__posts__empty-message">
                           <h2>No post <span>From api</span></h2>
                         </div>

@@ -140,6 +140,7 @@ class PostCard extends Component<CardProps, CardState> {
                             ( this.isActive(id) ? ' active-detail' : '' )
                         } 
                         onClick={(e) => this.showDetail(e,id)}
+                        key={'item-post-'+id}
                     >
                         <Container fluid className={ ( !title ? 'empty':'' ) + ' post-item animated '+ ( !this.state.isRead ? ' not-read':'')  } >
                             <Row>
