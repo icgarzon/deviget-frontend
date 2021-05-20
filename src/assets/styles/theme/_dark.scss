@@ -6,6 +6,15 @@ body {
 
         .main-header{
             border-bottom-color: $color-gray-3;
+
+            &__wrap{
+                &__menu{
+                    &--menu{
+                        background-image: url('../../images/header-menu-white.svg') !important;
+                    }
+                }
+            }
+
         }
 
         .list-group-item{
