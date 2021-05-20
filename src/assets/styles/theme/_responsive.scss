@@ -78,6 +78,9 @@
                     display: block !important;
                     pointer-events: all;
                 }
+                &__detail{
+                    display: none;
+                }
             }
         }
 
