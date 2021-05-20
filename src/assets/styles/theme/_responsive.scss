@@ -75,8 +75,14 @@
         .main-wrapper{
             &__contain{
                 &__navigation-bar{
+
                     display: block !important;
                     pointer-events: all;
+
+                    &__actions{
+                        bottom: 0px !important;
+                    }
+
                 }
                 &__detail{
                     display: none;
